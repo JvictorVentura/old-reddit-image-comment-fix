@@ -1,9 +1,22 @@
+search_for = "<image>"
+size = '50%'  
 comments = document.getElementsByClassName("md");
 comments = Array.from(comments);
-comments = comments.filter( (comment) => comment.innerText.includes("<image>") );
-comments = comments.map((child) => {
-  old = child.innerHTML.match(/<p><a href=\".*\" target=\"_blank\">&lt;image&gt;<\/a><\/p>/g);
-  image_link = child.querySelector('a').getAttribute('href');
-  to_replace = "<img src=" + image_link + " height=50% width=50% >";
-  child.innerHTML = child.innerHTML.replace(old[0], to_replace);
-});
+comments = comments.filter( (comment) => comment.innerText.includes(search_for));
+
+comments = comments.map( (comment) =>{
+  elements = comment.querySelectorAll('p');
+  elements = Array.from(elements);
+  elements = elements.filter( (element) => element.textContent.includes(search_for));
+
+  elements = elements.map( (element) => {
+    image_link = element.querySelector('a').getAttribute('href');
+    img = document.createElement('img');
+    img.setAttribute('src', image_link);
+    img.setAttribute('height', size);
+    img.setAttribute('width', size);
+    element.querySelector('a').replaceWith(img)
+  })
+
+})
+
