@@ -26,7 +26,7 @@ observer.observe(comment_area, observerOptions);
 function find_and_replace(){
   var size = '50%'
   var image_tag = "<image>"
-  var url_preview = "https://preview.redd.it"
+  var url_preview = ".redd.it"
   var posts = Array.from(document.getElementsByClassName("md"));
 
   posts = posts.map( (post)=> { return post.querySelectorAll('a')});
